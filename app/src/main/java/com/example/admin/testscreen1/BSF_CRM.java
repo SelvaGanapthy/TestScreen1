@@ -2,7 +2,12 @@ package com.example.admin.testscreen1;
 
 import android.app.ActionBar;
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -17,12 +22,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 
 import java.util.Calendar;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
+import static android.R.attr.data;
+
 public class BSF_CRM extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    private static final int RESULT_LOAD_IMAGE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +75,33 @@ public class BSF_CRM extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        CircleImageView navi_profile_pic=(CircleImageView)navigationView.getHeaderView(0).findViewById(R.id.navi_profile_pic);
+        navi_profile_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i, RESULT_LOAD_IMAGE);
+            }
+        });
+
         setFragment(new Navi_TabMain());
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+         //   NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+         //   navigationView.setNavigationItemSelectedListener(this);
+           // CircleImageView navi_profile_pic=(CircleImageView)navigationView.getHeaderView(0).findViewById(R.id.navi_profile_pic);
+          //  data.navi_profile_pic.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+        }
     }
 
     @Override
