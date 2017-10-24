@@ -11,15 +11,16 @@
     android:paddingRight="16dp"
     android:paddingTop="2dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="265dp"
-        android:layout_marginTop="30dp">
+        android:paddingTop="55dp">
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/imageView"
-            android:layout_width="106dp"
-            android:layout_height="106dp"
+            android:layout_width="98dp"
+            android:layout_height="98dp"
             android:layout_gravity="center"
             android:layout_marginBottom="3dp"
             android:src="@drawable/nav_accimg"

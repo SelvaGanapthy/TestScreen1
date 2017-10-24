@@ -1,5 +1,7 @@
 package com.example.admin.testscreen1;
 
+import android.app.ActionBar;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +16,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.DatePicker;
+
+import java.util.Calendar;
 
 public class BSF_CRM extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -29,8 +34,26 @@ public class BSF_CRM extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                DatePicker datePicker;
+                Calendar calendar;
+                int year, month, day;
+                calendar = Calendar.getInstance();
+                year = calendar.get(Calendar.YEAR);
+                month = calendar.get(Calendar.MONTH);
+                day = calendar.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(BSF_CRM.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                Snackbar.make(view, "Replace with your own action" + dayOfMonth + "-" + (monthOfYear + 1) + "-" + year, Snackbar.LENGTH_LONG)
+                                        .setAction("Action", null).show();
+
+
+                            }
+                        }, year, month, day);
+                datePickerDialog.show();
+
             }
         });
 
