@@ -12,6 +12,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -29,10 +30,14 @@ import java.util.Calendar;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.R.attr.data;
+import static android.R.attr.navigationIcon;
 
 public class BSF_CRM extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final int RESULT_LOAD_IMAGE = 1;
+     NavigationView navigationView;
+    CircleImageView navi_profile_pic;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,19 +78,23 @@ public class BSF_CRM extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+
         navigationView.setNavigationItemSelectedListener(this);
-        CircleImageView navi_profile_pic=(CircleImageView)navigationView.getHeaderView(0).findViewById(R.id.navi_profile_pic);
-        navi_profile_pic.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton navi_setProfile_pic = (FloatingActionButton) navigationView.getHeaderView(0).findViewById(R.id.navi_setprofile_pic);
+
+        navi_profile_pic = (CircleImageView) navigationView.getHeaderView(0).findViewById(R.id.navi_profile_pic);
+        navi_setProfile_pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
             }
         });
 
         setFragment(new Navi_TabMain());
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -97,10 +106,9 @@ public class BSF_CRM extends AppCompatActivity
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
-         //   NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-         //   navigationView.setNavigationItemSelectedListener(this);
-           // CircleImageView navi_profile_pic=(CircleImageView)navigationView.getHeaderView(0).findViewById(R.id.navi_profile_pic);
-          //  data.navi_profile_pic.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+
+            navi_profile_pic.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+
         }
     }
 
