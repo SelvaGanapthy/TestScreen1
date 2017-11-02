@@ -12,6 +12,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -35,8 +36,9 @@ import static android.R.attr.navigationIcon;
 public class BSF_CRM extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final int RESULT_LOAD_IMAGE = 1;
-     NavigationView navigationView;
+    NavigationView navigationView;
     CircleImageView navi_profile_pic;
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +84,7 @@ public class BSF_CRM extends AppCompatActivity
 
         navigationView.setNavigationItemSelectedListener(this);
         FloatingActionButton navi_setProfile_pic = (FloatingActionButton) navigationView.getHeaderView(0).findViewById(R.id.navi_setprofile_pic);
-
+        searchView = (SearchView) navigationView.getHeaderView(0).findViewById(R.id.id_searchView);
         navi_profile_pic = (CircleImageView) navigationView.getHeaderView(0).findViewById(R.id.navi_profile_pic);
         navi_setProfile_pic.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -8,8 +8,8 @@
     tools:context="com.example.admin.testscreen1.BSF_CRM"
     tools:showIn="@layout/app_bar_bsf__crm">
 
-    <FrameLayout
-        android:id="@+id/content_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
+        <FrameLayout
+            android:id="@+id/content_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></FrameLayout>
 </RelativeLayout>

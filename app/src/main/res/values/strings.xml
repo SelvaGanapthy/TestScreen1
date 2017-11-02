@@ -3,7 +3,7 @@
     <string name="password">Password</string>
     <string name="username">Username</string>
     <string name="buttonlogin">Login</string>
-    <string name="title_activity_bsf__crm">BSF_CRM</string>
+    <string name="title_activity_bsf__crm">BSFFRM</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
